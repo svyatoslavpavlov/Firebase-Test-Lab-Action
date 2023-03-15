@@ -5,11 +5,15 @@ inputs:
   arg-spec:
     description: 'a YAML formatted file that includes arguments for gcloud firebase test run command.'
     required: true
+  platform:
+    description: 'ios/android'
+    required: true
 runs:
   using: 'docker'
   image: 'Dockerfile'
   args:
     - ${{ inputs.arg-spec }}
+    - ${{ inputs.platform }}
 branding:
   icon: 'check-square'  
   color: 'blue'
