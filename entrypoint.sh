@@ -9,6 +9,7 @@ fi
 
 status=0
 arg_spec=$1
+platform=$2
 service_account_file=/opt/service_account.json
 
 echo "$SERVICE_ACCOUNT" > $service_account_file
@@ -18,7 +19,7 @@ project_id=$(cat $service_account_file | jq -r ".project_id")
 gcloud auth activate-service-account --key-file=$service_account_file
 gcloud config set project $project_id
 
-if gcloud firebase test android run $arg_spec
+if gcloud firebase test $platform run $arg_spec
 then
     echo "Test matrix successfully finished"
 else
